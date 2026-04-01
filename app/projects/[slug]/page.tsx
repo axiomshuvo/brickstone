@@ -4,6 +4,8 @@ import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react"
 import { projects } from "@/lib/projects"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
 
 export default function ProjectPage() {
   const params = useParams()
@@ -33,10 +35,12 @@ export default function ProjectPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-20">
+    <div className="min-h-screen bg-background">
+      <Navigation />
+
+      <main className="pt-24 md:pt-28">
+        {/* Back Link & Counter */}
+        <div className="flex items-center justify-between px-6 md:px-12 lg:px-20 mb-8">
           <Link
             href="/#projects"
             className="flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-muted-foreground hover:text-foreground transition-colors"
@@ -48,10 +52,9 @@ export default function ProjectPage() {
             ({String(currentIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")})
           </span>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <div className="pt-20 px-6 py-16 md:px-12 lg:px-20 md:py-24">
+        {/* Main Content */}
+        <div className="px-6 pb-16 md:px-12 lg:px-20 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Left: Project Image */}
           <div className="relative overflow-hidden">
@@ -167,7 +170,10 @@ export default function ProjectPage() {
             </div>
           </div>
         </div>
-      </div>
-    </main>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   )
 }
