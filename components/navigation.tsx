@@ -15,25 +15,21 @@ const navLinks = [
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY
       setScrolled(currentY > 60)
-      setHidden(currentY > lastScrollY && currentY > 400)
-      setLastScrollY(currentY)
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        hidden && !isOpen ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"}`}
+        scrolled ? "bg-background/95 backdrop-blur-md border-b border-border" : "bg-transparent"
+      }`}
     >
       <nav className="flex items-center justify-between px-6 py-5 md:px-12 lg:px-20">
         <Link
